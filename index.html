@@ -8,7 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <!-- ?v=4 forces Chrome & GitHub Pages to load the new Terracotta/Sage stylesheet immediately -->
+  <link rel="stylesheet" href="style.css?v=4" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -65,7 +66,7 @@
         <aside class="signal-stage" aria-label="Interactive Consumer Decision Signal Diagram">
           <div class="signal-stage-header">
             <span class="mono-meta">FIG 00 — BEHAVIORAL SIGNAL DECODER</span>
-            <span class="badge badge-cobalt">LIVE SYSTEM</span>
+            <span class="badge badge-cobalt">ATELIER EDITION</span>
           </div>
           <svg viewBox="0 0 460 320" class="signal-svg" role="img" aria-label="Animated graphic showing stimulus cues moving through consumer perception into strategic action">
             <circle cx="230" cy="160" r="115" fill="none" stroke="var(--border-line)" stroke-width="1" class="pulse-ring" />
@@ -203,7 +204,7 @@
       </div>
     </section>
 
-    <!-- BRAND & BUSINESS SIGNALS — LIVE EDITORIAL INSIGHT FEED -->
+    <!-- BRAND & BUSINESS SIGNALS — LIVE DIRECT CORS ENGINE -->
     <section class="section-block" id="signals" aria-labelledby="signals-heading">
       <div class="container">
         <div class="section-head reveal">
@@ -212,25 +213,13 @@
             <h2 id="signals-heading" class="section-title">Live dispatches in brand strategy, advertising &amp; consumer markets.</h2>
           </div>
           <div class="lens-buttons" role="toolbar" aria-label="Select business news feed">
-            <button type="button" class="lens-btn is-active"
-              data-feed-url="https://economictimes.indiatimes.com/industry/services/advertising/rssfeeds/13357212.cms"
-              data-feed-source="ET Advertising &amp; Marketing"
-              data-feed-category="BRAND &amp; AD STRATEGY"
-              data-publisher-url="https://brandequity.economictimes.indiatimes.com/">
-              Brand &amp; Advertising (India)
+            <button type="button" class="lens-btn is-active" data-signal-topic="brand_india">
+              Brand &amp; Advertising
             </button>
-            <button type="button" class="lens-btn"
-              data-feed-url="https://economictimes.indiatimes.com/industry/cons-products/rssfeeds/13358759.cms"
-              data-feed-source="ET Consumer Products &amp; Retail"
-              data-feed-category="CONSUMER &amp; RETAIL"
-              data-publisher-url="https://economictimes.indiatimes.com/industry/cons-products">
+            <button type="button" class="lens-btn" data-signal-topic="consumer_retail">
               Consumer &amp; Retail
             </button>
-            <button type="button" class="lens-btn"
-              data-feed-url="https://www.marketingdive.com/feeds/news/"
-              data-feed-source="Marketing Dive"
-              data-feed-category="GLOBAL MARTECH &amp; AI"
-              data-publisher-url="https://www.marketingdive.com/">
+            <button type="button" class="lens-btn" data-signal-topic="ai_marketing">
               Global Marketing &amp; AI
             </button>
           </div>
@@ -239,13 +228,13 @@
         <div class="signals-toolbar reveal">
           <div class="signals-status">
             <span class="status-dot-live" id="signalsStatusDot" aria-hidden="true"></span>
-            <span id="signalsStatusText">Connecting to live RSS feed…</span>
+            <span id="signalsStatusText">Synchronizing live market dispatches…</span>
           </div>
-          <button type="button" class="btn-minimal" id="refreshSignalsBtn">↻ Refresh Feed</button>
+          <button type="button" class="btn-minimal" id="refreshSignalsBtn">↻ Refresh Live Feed</button>
         </div>
 
         <div class="signals-grid" id="signalsGrid" aria-live="polite">
-          <!-- Populated dynamically by script.js from live RSS or verified direct publisher fallback -->
+          <!-- Populated automatically by script.js?v=4 -->
         </div>
       </div>
     </section>
@@ -291,6 +280,7 @@
       </nav>
     </div>
   </footer>
-  <script src="script.js" defer></script>
+  <!-- ?v=4 forces Chrome & GitHub Pages to load the new Chatbot + Direct CORS News Engine immediately -->
+  <script src="script.js?v=4" defer></script>
 </body>
 </html>
