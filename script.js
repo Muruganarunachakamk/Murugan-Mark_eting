@@ -1,6 +1,9 @@
 /**
- * MURUGAN ARUNACHALAM K — UPGRADED STUDIO MOTION, "SIG" COMPANION,
- * FAIL-SAFE CREATIVE SIGNAL LOADER, LIVE RSS BRAND SIGNALS & BRL MODEL ENGINE
+ * MURUGAN ARUNACHALAM K — STUDIO ENGINE (V3 UPGRADE)
+ * 1. Unconditional Light-First Theme ("Paper") with fresh storage key
+ * 2. Interactive Pre-Defined Portfolio Bot ("SIG Concierge" — No AI/API)
+ * 3. Multi-Proxy Live RSS Engine (Google News RSS + 3-Tier Failover)
+ * 4. BRL Conceptual Diagram Interactive Node & Pathway Inspector
  */
 
 (function () {
@@ -10,28 +13,32 @@
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------------------------------------------------------------------------
-  // 1. THEME PERSISTENCE (WARM ARCHIVAL PAPER vs. OBSIDIAN INK)
+  // 1. LIGHT-FIRST THEME ENGINE (DEFAULT = LIGHT "PAPER" MODE)
   // ---------------------------------------------------------------------------
   const root = document.documentElement;
   const themeBtn = document.getElementById('themeToggle');
   const themeLabel = document.getElementById('themeLabel');
-  const THEME_KEY = 'mak_studio_theme';
+  // New storage key clears out any previously cached 'dark' setting
+  const THEME_KEY = 'mak_atelier_light_default_v3';
 
   function setTheme(mode) {
     root.setAttribute('data-theme', mode);
     if (themeLabel) {
-      themeLabel.textContent = mode === 'dark' ? 'Ink' : 'Paper';
+      themeLabel.textContent = mode === 'dark' ? 'Espresso' : 'Paper';
     }
   }
 
   try {
     const saved = localStorage.getItem(THEME_KEY);
-    if (saved === 'dark' || saved === 'light') {
-      setTheme(saved);
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // Default strictly to 'light' unless user explicitly toggled 'dark'
+    if (saved === 'dark') {
       setTheme('dark');
+    } else {
+      setTheme('light');
     }
-  } catch (_) {}
+  } catch (_) {
+    setTheme('light');
+  }
 
   if (themeBtn) {
     themeBtn.addEventListener('click', function () {
@@ -67,7 +74,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 3. CREATIVE SIGNAL LOADING EXPERIENCE (FAIL-SAFE & BACK/FORWARD SAFE)
+  // 3. CREATIVE SIGNAL LOADING EXPERIENCE
   // ---------------------------------------------------------------------------
   const curtain = document.querySelector('.page-transition-curtain');
   let loaderTimeout = null;
@@ -82,7 +89,7 @@
       '<div class="loader-card">' +
       '  <div class="loader-brand-row">' +
       '    <span class="loader-monogram">M·A·K</span>' +
-      '    <span class="mono-meta">SIGNAL STUDIO</span>' +
+      '    <span class="mono-meta">STUDIO ATELIER</span>' +
       '  </div>' +
       '  <div class="loader-wave-track" aria-hidden="true">' +
       '    <div class="loader-wave-bar"></div>' +
@@ -106,7 +113,6 @@
   upgradeCurtainMarkup();
   hideCurtain();
 
-  // Always clear loader on history traversal or tab restore
   window.addEventListener('pageshow', hideCurtain);
   window.addEventListener('popstate', hideCurtain);
   document.addEventListener('DOMContentLoaded', hideCurtain);
@@ -149,121 +155,198 @@
         if (labelEl) labelEl.textContent = contextualMsg;
         e.preventDefault();
         curtain.classList.add('is-active');
-
-        // Fail-safe so the user is never stuck on the loader
         loaderTimeout = setTimeout(hideCurtain, 900);
 
         setTimeout(function () {
           window.location.href = href;
-        }, 170);
+        }, 165);
       });
     });
   }
 
   // ---------------------------------------------------------------------------
-  // 4. "SIG" — ORIGINAL ANIMATED SVG FIELD-NOTE COMPANION
+  // 4. PRE-DEFINED INTERACTIVE PORTFOLIO BOT ("SIG CONCIERGE" — NO AI/API)
   // ---------------------------------------------------------------------------
-  const BUBBLE_STATE_KEY = 'mak_sig_minimized';
+  const BOT_RESPONSES = {
+    about_murugan: {
+      question: 'Who is Murugan?',
+      answer:
+        'Murugan Arunachalam K is an MBA Candidate in Marketing at Amrita School of Business, Coimbatore (2025–2027) with a B.Com in Accounting & Finance (8.1 CGPA). He specializes in consumer psychology, marketing research, and brand segmentation.',
+      links: [
+        { label: 'Read Full Story →', url: 'about.html' },
+        { label: 'Capabilities →', url: 'capabilities.html' }
+      ]
+    },
+    brl_research: {
+      question: 'Explain BRL Research',
+      answer:
+        'His Term 5 Business Research Lab (BRL) WIP study examines how Chatbot Anthropomorphism influences Situational Consumer Skepticism in e-commerce via a Hybrid Parallel & Serial Mediation Model (Warmth, Competence, Privacy Concerns, and Authenticity across 14 hypotheses).',
+      links: [{ label: 'Explore Interactive Model →', url: 'research.html' }]
+    },
+    top_projects: {
+      question: 'Top Case Studies',
+      answer:
+        'Selected work includes: (1) Gravity Shift Smart Backpack STP & WTP Strategy, (2) Slow Living Brand Qualitative Discovery & 6-Stage Journey Map, (3) Advertising Media Primary Survey (N=100+, Chi-Square & ANOVA), and (4) Pragati PR Cold-Calling Outreach.',
+      links: [
+        { label: 'All Work Gallery →', url: 'work.html' },
+        { label: 'Gravity Shift →', url: 'project-gravity-shift.html' },
+        { label: 'Slow Living →', url: 'project-slow-living.html' }
+      ]
+    },
+    skills_tools: {
+      question: 'Skills & Certifications',
+      answer:
+        'Certified in IBM/Coursera Generative AI for Digital Marketing (4 courses incl. GEO), HubSpot Digital Marketing, Microsoft Office Specialist (MOS) Excel Associate 2019, and NPTEL Consumer Psychology. Skilled in survey design, ANOVA/Chi-Square, and Power BI.',
+      links: [{ label: 'View Toolkit & Proof →', url: 'capabilities.html' }]
+    },
+    contact_info: {
+      question: 'Contact & Hire',
+      answer:
+        'Murugan is open to Marketing Management Trainee, Brand Strategy, Consumer Research, and Digital Marketing roles. Based in Coimbatore and open to relocation.',
+      links: [
+        { label: 'Open Contact Page →', url: 'contact.html' },
+        { label: 'Email Directly ↗', url: 'mailto:muruganarunachalamk@gmail.com' }
+      ]
+    }
+  };
 
-  function getPageContextMessage() {
+  function getWelcomeBotMessage() {
     const path = (window.location.pathname || '').toLowerCase();
     if (path.includes('research.html')) {
-      return 'This diagram shows Murugan’s proposed Term 5 BRL conceptual model. Click any construct node or pathway button to inspect its theoretical basis!';
+      return 'Welcome to the BRL Research Lab! Click any oval node on the diagram to inspect its construct definition, or pick a question below.';
     }
     if (path.includes('work.html')) {
-      return 'Filter by Consumer Research, Brand Strategy, or Outreach—or click any visual cover to open the full 7-step case study.';
+      return 'Here are Murugan’s 5 verified studies. Use the filter pills above or ask me about any project below!';
     }
-    if (path.includes('project-gravity-shift')) {
-      return 'Field Note: Segmenting by physical load duration rather than age isolated Urban Commuter Professionals as the highest-WTP launch target.';
-    }
-    if (path.includes('project-slow-living')) {
-      return 'Field Note: Stage 03 (Consideration) was where wellness aspirations met weekday reality—so we designed around 5-minute rituals.';
-    }
-    if (path.includes('project-ad-media')) {
-      return 'Field Note: Surveyed 100+ consumers and applied Chi-Square (χ²) and One-Way ANOVA in Excel to test media influence.';
-    }
-    if (path.includes('project-pragati')) {
-      return 'Field Note: Outbound cold-calling for Pragati tests value propositions live in under ten seconds.';
-    }
-    if (path.includes('capabilities.html')) {
-      return 'No invented percentage bars here—every tool and research method is paired with verified coursework or primary project evidence.';
-    }
-    if (path.includes('about.html')) {
-      return 'Murugan pairs a B.Com in Accounting & Finance (8.1 CGPA) with MBA Marketing research at Amrita School of Business.';
-    }
-    if (path.includes('contact.html')) {
-      return 'Ready to connect about marketing roles or research? Use one-click email copy or visit LinkedIn.';
-    }
-    return 'Hi, I’m Sig—your field-journal guide. Explore Murugan’s BRL research model, case studies, or live Brand & Business Signals below.';
+    return 'Hi! I’m Sig, Murugan’s pre-defined portfolio guide. Select any topic chip below to explore his research, case studies, or credentials:';
   }
 
-  function injectSigCompanion() {
-    if (document.getElementById('sigCompanion')) return;
+  function injectInteractiveBot() {
+    if (document.getElementById('sigChatbotRoot')) return;
 
-    const wrapper = document.createElement('aside');
-    wrapper.className = 'sig-companion';
-    wrapper.id = 'sigCompanion';
-    wrapper.setAttribute('aria-label', 'Sig Portfolio Guide');
+    const rootWidget = document.createElement('aside');
+    rootWidget.className = 'sig-chatbot-root';
+    rootWidget.id = 'sigChatbotRoot';
+    rootWidget.setAttribute('aria-label', 'Sig Pre-Defined Portfolio Chatbot');
 
-    let isMinimized = false;
-    try {
-      isMinimized = sessionStorage.getItem(BUBBLE_STATE_KEY) === '1';
-    } catch (_) {}
-
-    wrapper.innerHTML =
-      '<div class="sig-bubble' +
-      (isMinimized ? ' is-hidden' : '') +
-      '" id="sigBubble" role="status" aria-live="polite">' +
-      '  <div class="sig-bubble-header">' +
-      '    <span class="sig-name">SIG · FIELD GUIDE</span>' +
-      '    <button type="button" class="sig-close" id="sigCloseBtn" aria-label="Minimize guide note">×</button>' +
+    rootWidget.innerHTML =
+      '<div class="sig-chat-window is-closed" id="sigChatWindow" role="dialog" aria-label="Portfolio Guide Chat">' +
+      '  <div class="sig-chat-header">' +
+      '    <div class="sig-chat-header-left">' +
+      '      <span class="sig-online-dot" aria-hidden="true"></span>' +
+      '      <div>' +
+      '        <span class="sig-chat-title">SIG · PORTFOLIO GUIDE</span>' +
+      '        <span class="sig-chat-subtitle">Pre-defined interactive assistant</span>' +
+      '      </div>' +
+      '    </div>' +
+      '    <button type="button" class="sig-chat-close" id="sigChatCloseBtn" aria-label="Close chat window">CLOSE ×</button>' +
       '  </div>' +
-      '  <p id="sigMessage">' +
-      getPageContextMessage() +
-      '</p>' +
+      '  <div class="sig-chat-messages" id="sigChatMessages" aria-live="polite">' +
+      '    <div class="sig-msg sig-msg-bot" id="sigInitialMsg">' +
+      getWelcomeBotMessage() +
+      '    </div>' +
+      '  </div>' +
+      '  <div class="sig-chat-chips-area">' +
+      '    <span class="sig-chips-label">Select a question:</span>' +
+      '    <div class="sig-chips-list">' +
+      '      <button type="button" class="sig-chip-btn" data-bot-topic="about_murugan">Who is Murugan?</button>' +
+      '      <button type="button" class="sig-chip-btn" data-bot-topic="brl_research">BRL Research Model</button>' +
+      '      <button type="button" class="sig-chip-btn" data-bot-topic="top_projects">Top Case Studies</button>' +
+      '      <button type="button" class="sig-chip-btn" data-bot-topic="skills_tools">Skills &amp; Certs</button>' +
+      '      <button type="button" class="sig-chip-btn" data-bot-topic="contact_info">Contact &amp; Hire</button>' +
+      '    </div>' +
+      '  </div>' +
       '</div>' +
-      '<button type="button" class="sig-avatar-btn" id="sigAvatarBtn" aria-label="Toggle Sig field guide">' +
-      '  <svg viewBox="0 0 48 48" class="sig-svg" aria-hidden="true">' +
-      '    <g class="sig-float-group">' +
-      '      <line x1="24" y1="4" x2="24" y2="11" stroke="var(--border-strong)" stroke-width="2" stroke-linecap="round" />' +
-      '      <circle cx="24" cy="4" r="3" fill="var(--cobalt)" class="sig-antenna-dot" />' +
-      '      <circle cx="24" cy="25" r="14" fill="var(--bg-page)" stroke="var(--border-strong)" stroke-width="2.2" />' +
-      '      <circle cx="24" cy="25" r="9.5" fill="var(--cobalt-soft)" stroke="var(--cobalt)" stroke-width="1.5" />' +
-      '      <g id="sigPupilGroup">' +
-      '        <circle cx="24" cy="25" r="4.2" fill="var(--cobalt)" />' +
-      '        <circle cx="25.5" cy="23.5" r="1.4" fill="#ffffff" />' +
+      '<div class="sig-launcher-row">' +
+      '  <button type="button" class="sig-launcher-pill" id="sigLauncherPill">Ask Sig Guide 💬</button>' +
+      '  <button type="button" class="sig-avatar-btn" id="sigAvatarBtn" aria-expanded="false" aria-controls="sigChatWindow" aria-label="Open interactive portfolio guide">' +
+      '    <svg viewBox="0 0 48 48" class="sig-svg" aria-hidden="true">' +
+      '      <g class="sig-float-group">' +
+      '        <line x1="24" y1="4" x2="24" y2="11" stroke="var(--border-strong)" stroke-width="2" stroke-linecap="round" />' +
+      '        <circle cx="24" cy="4" r="3" fill="var(--cobalt)" class="sig-antenna-dot" />' +
+      '        <circle cx="24" cy="25" r="14" fill="var(--bg-page)" stroke="var(--border-strong)" stroke-width="2.2" />' +
+      '        <circle cx="24" cy="25" r="9.5" fill="var(--cobalt-soft)" stroke="var(--cobalt)" stroke-width="1.5" />' +
+      '        <g id="sigPupilGroup">' +
+      '          <circle cx="24" cy="25" r="4.2" fill="var(--cobalt)" />' +
+      '          <circle cx="25.5" cy="23.5" r="1.4" fill="#ffffff" />' +
+      '        </g>' +
+      '        <path d="M 18 40 L 24 45 L 30 40" fill="none" stroke="var(--coral)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />' +
       '      </g>' +
-      '      <path d="M 18 40 L 24 45 L 30 40" fill="none" stroke="var(--coral)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />' +
-      '    </g>' +
-      '  </svg>' +
-      '</button>';
+      '    </svg>' +
+      '  </button>' +
+      '</div>';
 
-    document.body.appendChild(wrapper);
+    document.body.appendChild(rootWidget);
 
-    const bubble = document.getElementById('sigBubble');
-    const closeBtn = document.getElementById('sigCloseBtn');
+    const chatWin = document.getElementById('sigChatWindow');
+    const closeBtn = document.getElementById('sigChatCloseBtn');
     const avatarBtn = document.getElementById('sigAvatarBtn');
+    const launcherPill = document.getElementById('sigLauncherPill');
+    const messagesBox = document.getElementById('sigChatMessages');
     const pupilGroup = document.getElementById('sigPupilGroup');
 
-    if (closeBtn && bubble) {
-      closeBtn.addEventListener('click', function () {
-        bubble.classList.add('is-hidden');
-        try {
-          sessionStorage.setItem(BUBBLE_STATE_KEY, '1');
-        } catch (_) {}
-      });
+    function toggleChatWindow(forceOpen) {
+      if (!chatWin) return;
+      const willOpen =
+        typeof forceOpen === 'boolean' ? forceOpen : chatWin.classList.contains('is-closed');
+      chatWin.classList.toggle('is-closed', !willOpen);
+      if (avatarBtn) avatarBtn.setAttribute('aria-expanded', String(willOpen));
+      if (launcherPill) {
+        launcherPill.textContent = willOpen ? 'Hide Guide ×' : 'Ask Sig Guide 💬';
+      }
     }
 
-    if (avatarBtn && bubble) {
+    if (avatarBtn) {
       avatarBtn.addEventListener('click', function () {
-        const nowHidden = bubble.classList.toggle('is-hidden');
-        try {
-          sessionStorage.setItem(BUBBLE_STATE_KEY, nowHidden ? '1' : '0');
-        } catch (_) {}
+        toggleChatWindow();
+      });
+    }
+    if (launcherPill) {
+      launcherPill.addEventListener('click', function () {
+        toggleChatWindow();
+      });
+    }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function () {
+        toggleChatWindow(false);
       });
     }
 
-    // Subtle eye-tracking toward pointer on desktop (low-cost transform)
+    rootWidget.querySelectorAll('[data-bot-topic]').forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        const key = chip.getAttribute('data-bot-topic');
+        const entry = BOT_RESPONSES[key];
+        if (!entry || !messagesBox) return;
+
+        // 1. Append user bubble
+        const userDiv = document.createElement('div');
+        userDiv.className = 'sig-msg sig-msg-user';
+        userDiv.textContent = entry.question;
+        messagesBox.appendChild(userDiv);
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        // 2. Append bot reply after short natural pause
+        setTimeout(function () {
+          const botDiv = document.createElement('div');
+          botDiv.className = 'sig-msg sig-msg-bot';
+          let linksHtml = '';
+          if (entry.links && entry.links.length > 0) {
+            linksHtml =
+              '<div class="sig-msg-actions">' +
+              entry.links
+                .map(function (l) {
+                  return '<a href="' + l.url + '" class="sig-inline-link">' + l.label + '</a>';
+                })
+                .join('') +
+              '</div>';
+          }
+          botDiv.innerHTML = '<div>' + entry.answer + '</div>' + linksHtml;
+          messagesBox.appendChild(botDiv);
+          messagesBox.scrollTop = messagesBox.scrollHeight;
+        }, 220);
+      });
+    });
+
     if (pupilGroup && !prefersReducedMotion && window.matchMedia('(pointer: fine)').matches) {
       window.addEventListener(
         'mousemove',
@@ -275,27 +358,29 @@
           const dy = e.clientY - cy;
           const angle = Math.atan2(dy, dx);
           const dist = Math.min(3.2, Math.hypot(dx, dy) / 90);
-          const tx = Math.cos(angle) * dist;
-          const ty = Math.sin(angle) * dist;
-          pupilGroup.style.transform = 'translate(' + tx.toFixed(2) + 'px, ' + ty.toFixed(2) + 'px)';
+          pupilGroup.style.transform =
+            'translate(' +
+            (Math.cos(angle) * dist).toFixed(2) +
+            'px, ' +
+            (Math.sin(angle) * dist).toFixed(2) +
+            'px)';
         },
         { passive: true }
       );
     }
   }
 
-  function updateSigMessage(text) {
-    const msgEl = document.getElementById('sigMessage');
-    const bubble = document.getElementById('sigBubble');
-    if (msgEl && text) {
-      msgEl.textContent = text;
-    }
-    if (bubble && bubble.classList.contains('is-hidden')) {
-      bubble.classList.remove('is-hidden');
-    }
+  function pushBotNotification(text) {
+    const messagesBox = document.getElementById('sigChatMessages');
+    if (!messagesBox || !text) return;
+    const botDiv = document.createElement('div');
+    botDiv.className = 'sig-msg sig-msg-bot';
+    botDiv.textContent = text;
+    messagesBox.appendChild(botDiv);
+    messagesBox.scrollTop = messagesBox.scrollHeight;
   }
 
-  injectSigCompanion();
+  injectInteractiveBot();
 
   // ---------------------------------------------------------------------------
   // 5. SCROLL-TRIGGERED REVEALS
@@ -325,7 +410,7 @@
   }
 
   // ---------------------------------------------------------------------------
-  // 6. CURSOR-FOLLOWING PILL FOR PROJECT TILES (DESKTOP)
+  // 6. CURSOR-FOLLOWING PILL FOR PROJECT TILES
   // ---------------------------------------------------------------------------
   const cursorPill = document.getElementById('cursorPill');
   const hoverTiles = document.querySelectorAll('[data-cursor-text]');
@@ -367,30 +452,20 @@
           b.setAttribute('aria-pressed', String(active));
         });
 
-        let visibleCount = 0;
         projectTiles.forEach(function (tile) {
           const cats = (tile.getAttribute('data-category') || '').split(/\s+/);
           if (filter === 'all' || cats.includes(filter)) {
             tile.removeAttribute('hidden');
-            visibleCount++;
           } else {
             tile.setAttribute('hidden', '');
           }
         });
-
-        updateSigMessage(
-          'Showing ' +
-            visibleCount +
-            ' study(s) under "' +
-            btn.textContent.trim() +
-            '". Click any tile to inspect the full methodology.'
-        );
       });
     });
   }
 
   // ---------------------------------------------------------------------------
-  // 8. UPGRADED BRL RESEARCH MODEL INTERACTIVE ENGINE (PATHWAYS + NODES)
+  // 8. BRL RESEARCH MODEL INTERACTIVE ENGINE
   // ---------------------------------------------------------------------------
   const lensBtns = document.querySelectorAll('[data-model-lens]');
   const modelElements = document.querySelectorAll('[data-pathway]');
@@ -431,38 +506,32 @@
     iv: {
       title: 'Independent Variable (IV): Chatbot Anthropomorphism',
       desc: 'Definition (Sec. 8): Degree to which consumers perceive the support chatbot as possessing human-like visual, identity, or conversational cues. Theoretical basis: CASA. Manipulation check (Sec. 15F): 3 items adapted from Aggarwal & McGill (2007).',
-      badge: 'IV · CASA PARADIGM',
-      matchPathways: ['iv', 'h1', 'serial', 'exploratory']
+      badge: 'IV · CASA PARADIGM'
     },
     m1: {
       title: 'Mediator 1 (M1): Perceived Warmth (Parallel Pathway H4a)',
       desc: 'Definition (Sec. 8): Perception that the chatbot is friendly, sincere, caring, and motivated by benevolent intent. Theoretical basis: Stereotype Content Model (SCM). Working scale (Sec. 15G): 4 items adapted from Xu, Leung & Yan (2013). Connected via H1a (+, mixed) and H2a (−).',
-      badge: 'MEDIATOR 1 · SCM',
-      matchPathways: ['m1']
+      badge: 'MEDIATOR 1 · SCM'
     },
     m2: {
       title: 'Mediator 2 (M2): Perceived Competence (Parallel H4b & Serial Anchor H3/H4e)',
       desc: 'Definition (Sec. 8): Perception that the chatbot is knowledgeable, capable, efficient, and able to resolve the issue. Theoretical basis: SCM. Connected via H1b (+, strong), H2b (−), and H3 (+, strong serial predictor of Perceived Authenticity).',
-      badge: 'MEDIATOR 2 · SCM & SERIAL',
-      matchPathways: ['m2', 'serial']
+      badge: 'MEDIATOR 2 · SCM & SERIAL'
     },
     m4: {
       title: 'Mediator 4 (M4): Perceived Authenticity (Parallel H4d & Serial Receiver H3/H4e)',
       desc: 'Definition (Sec. 8): Degree to which the chatbot’s human-like presentation feels genuine and natural rather than performative. Theoretical basis: Social Response Theory. Predicted directly by IV (H1d, +) and serially by Competence (H3, +); predicts Skepticism via H2d (−, to test).',
-      badge: 'MEDIATOR 4 · SOCIAL RESPONSE',
-      matchPathways: ['m4', 'serial']
+      badge: 'MEDIATOR 4 · SOCIAL RESPONSE'
     },
     m3: {
       title: 'Mediator 3 (M3): Privacy Concerns (Risk-Appraisal Parallel Pathway H4c)',
       desc: 'Definition (Sec. 8): Apprehension that the chatbot or firm may collect, store, monitor, or misuse personal or transactional data. Theoretical basis: Privacy Calculus. Connected via H1c (+) and H2c (+), creating a positive indirect effect on skepticism.',
-      badge: 'MEDIATOR 3 · PRIVACY CALCULUS',
-      matchPathways: ['m3']
+      badge: 'MEDIATOR 3 · PRIVACY CALCULUS'
     },
     dv: {
       title: 'Dependent Variable (DV): Situational Consumer Skepticism',
       desc: 'Definition (Sec. 8): State-like, interaction-specific active doubt about the chatbot’s genuine intent to help, its capability, and the firm’s cost-cutting motives (distinct from trait cynicism or low trust). Theoretical basis: Persuasion Knowledge Model (PKM).',
-      badge: 'DV · PERSUASION KNOWLEDGE',
-      matchPathways: ['dv', 'h2', 'serial', 'exploratory']
+      badge: 'DV · PERSUASION KNOWLEDGE'
     }
   };
 
@@ -504,8 +573,7 @@
 
     modelElements.forEach(function (el) {
       const pathways = (el.getAttribute('data-pathway') || '').split(/\s+/);
-      const isMatch = pathways.includes(nodeId);
-      if (isMatch) {
+      if (pathways.includes(nodeId)) {
         el.classList.remove('model-dimmed');
         el.classList.add('model-highlighted');
       } else {
@@ -517,43 +585,60 @@
     if (inspectorTitle) inspectorTitle.textContent = data.title;
     if (inspectorDesc) inspectorDesc.textContent = data.desc;
     if (inspectorBadge) inspectorBadge.textContent = data.badge;
-    updateSigMessage(data.title + ' — ' + data.desc);
+    pushBotNotification(data.title + ': ' + data.desc);
   }
 
   if (lensBtns.length > 0 && modelElements.length > 0) {
     lensBtns.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        const lens = btn.getAttribute('data-model-lens') || 'all';
-        activateModelLens(lens);
+        activateModelLens(btn.getAttribute('data-model-lens') || 'all');
       });
     });
 
     selectableNodes.forEach(function (node) {
       node.addEventListener('click', function () {
-        const nodeId = node.getAttribute('data-node-id');
-        activateNodeInspection(nodeId, node);
+        activateNodeInspection(node.getAttribute('data-node-id'), node);
       });
       node.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          const nodeId = node.getAttribute('data-node-id');
-          activateNodeInspection(nodeId, node);
+          activateNodeInspection(node.getAttribute('data-node-id'), node);
         }
       });
     });
   }
 
   // ---------------------------------------------------------------------------
-  // 9. "BRAND & BUSINESS SIGNALS" — LIVE KEYLESS RSS FEED INTEGRATION
+  // 9. FIXED 3-TIER MULTI-PROXY LIVE RSS FEED ENGINE
+  //    Uses proxy-friendly Google News RSS feeds + 3 automatic failover proxies
   // ---------------------------------------------------------------------------
   const signalsGrid = document.getElementById('signalsGrid');
   const signalsStatusText = document.getElementById('signalsStatusText');
   const signalsStatusDot = document.getElementById('signalsStatusDot');
   const refreshSignalsBtn = document.getElementById('refreshSignalsBtn');
-  const signalsCategoryBtns = document.querySelectorAll('[data-Feed-url]');
+  const signalsCategoryBtns = document.querySelectorAll('[data-feed-url]');
 
-  const DEFAULT_RSS_URL =
-    'https://economictimes.indiatimes.com/industry/services/advertising/rssfeeds/13357212.cms';
+  // High-reliability Google News RSS queries that never block cloud proxies
+  const FEED_PRESETS = [
+    {
+      url: 'https://news.google.com/rss/search?q=brand+strategy+OR+advertising+marketing+India&hl=en-IN&gl=IN&ceid=IN:en',
+      source: 'Brand & Advertising (India)',
+      category: 'BRAND & AD STRATEGY',
+      publisherUrl: 'https://brandequity.economictimes.indiatimes.com/'
+    },
+    {
+      url: 'https://news.google.com/rss/search?q=FMCG+OR+retail+consumer+brands+India&hl=en-IN&gl=IN&ceid=IN:en',
+      source: 'Consumer & Retail Markets',
+      category: 'CONSUMER & RETAIL',
+      publisherUrl: 'https://www.afaqs.com/'
+    },
+    {
+      url: 'https://news.google.com/rss/search?q=digital+marketing+AI+consumer+psychology&hl=en-US&gl=US&ceid=US:en',
+      source: 'Global Marketing & AI',
+      category: 'GLOBAL MARTECH & AI',
+      publisherUrl: 'https://www.marketingdive.com/'
+    }
+  ];
 
   function stripHtml(raw) {
     const doc = new DOMParser().parseFromString(raw || '', 'text/html');
@@ -571,12 +656,138 @@
     });
   }
 
-  function renderFallbackPortals(reasonMsg) {
+  function parseXmlRssItems(xmlString) {
+    const xmlDoc = new DOMParser().parseFromString(xmlString, 'text/xml');
+    const itemNodes = Array.from(xmlDoc.querySelectorAll('item'));
+    return itemNodes.map(function (node) {
+      const title = (node.querySelector('title') && node.querySelector('title').textContent) || '';
+      const link = (node.querySelector('link') && node.querySelector('link').textContent) || '';
+      const pubDate =
+        (node.querySelector('pubDate') && node.querySelector('pubDate').textContent) || '';
+      const sourceEl = node.querySelector('source');
+      const sourceName = (sourceEl && sourceEl.textContent) || '';
+      const desc =
+        (node.querySelector('description') && node.querySelector('description').textContent) || '';
+      return {
+        title: title,
+        link: link,
+        pubDate: pubDate,
+        author: sourceName,
+        description: desc
+      };
+    });
+  }
+
+  async function fetchRssWithFailover(rssUrl) {
+    // Tier 1: rss2json API
+    try {
+      const res1 = await fetch(
+        'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl)
+      );
+      if (res1.ok) {
+        const data1 = await res1.json();
+        if (data1 && data1.status === 'ok' && Array.isArray(data1.items) && data1.items.length > 0) {
+          return data1.items;
+        }
+      }
+    } catch (_) {}
+
+    // Tier 2: AllOrigins JSON wrapper + native XML DOMParser
+    try {
+      const res2 = await fetch(
+        'https://api.allorigins.win/get?url=' + encodeURIComponent(rssUrl)
+      );
+      if (res2.ok) {
+        const data2 = await res2.json();
+        if (data2 && data2.contents) {
+          const items2 = parseXmlRssItems(data2.contents);
+          if (items2.length > 0) return items2;
+        }
+      }
+    } catch (_) {}
+
+    // Tier 3: CodeTabs raw XML proxy + native XML DOMParser
+    const res3 = await fetch(
+      'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(rssUrl)
+    );
+    if (res3.ok) {
+      const xmlText = await res3.text();
+      const items3 = parseXmlRssItems(xmlText);
+      if (items3.length > 0) return items3;
+    }
+
+    throw new Error('All RSS proxies unreachable');
+  }
+
+  function renderLiveArticles(items, sourceLabel, categoryTag, publisherUrl) {
+    if (!signalsGrid) return;
+    const topItems = items.slice(0, 6);
+    signalsGrid.innerHTML = topItems
+      .map(function (item) {
+        let cleanTitle = stripHtml(item.title || 'Untitled Dispatch');
+        let publisherName = item.author || sourceLabel;
+
+        // Extract trailing " - Publisher" from Google News titles cleanly
+        const dashIdx = cleanTitle.lastIndexOf(' - ');
+        if (dashIdx > 20) {
+          publisherName = cleanTitle.slice(dashIdx + 3).trim();
+          cleanTitle = cleanTitle.slice(0, dashIdx).trim();
+        }
+
+        let cleanDesc = stripHtml(item.description || item.content || '');
+        if (!cleanDesc || cleanDesc === cleanTitle || cleanDesc.length < 25) {
+          cleanDesc =
+            'Live market dispatch via ' +
+            publisherName +
+            '. Click below to read the full coverage from the original publisher.';
+        } else if (cleanDesc.length > 155) {
+          cleanDesc = cleanDesc.slice(0, 155) + '…';
+        }
+
+        const pubDate = formatPubDate(item.pubDate);
+        const link = item.link || publisherUrl;
+
+        return (
+          '<article class="signal-news-card">' +
+          '  <div>' +
+          '    <div class="signal-news-meta">' +
+          '      <span class="badge badge-cobalt">' +
+          categoryTag +
+          '</span>' +
+          '      <span class="mono-meta">' +
+          publisherName +
+          ' · ' +
+          pubDate +
+          '</span>' +
+          '    </div>' +
+          '    <h3 class="signal-news-title"><a href="' +
+          link +
+          '" target="_blank" rel="noopener noreferrer">' +
+          cleanTitle +
+          '</a></h3>' +
+          '    <p class="signal-news-summary">' +
+          cleanDesc +
+          '</p>' +
+          '  </div>' +
+          '  <div class="signal-news-footer">' +
+          '    <a href="' +
+          link +
+          '" target="_blank" rel="noopener noreferrer" class="btn-minimal">Read original story ↗</a>' +
+          '    <a href="' +
+          publisherUrl +
+          '" target="_blank" rel="noopener noreferrer" class="mono-meta">Portal ↗</a>' +
+          '  </div>' +
+          '</article>'
+        );
+      })
+      .join('');
+  }
+
+  function renderFallbackPortals() {
     if (!signalsGrid) return;
     if (signalsStatusText) {
       signalsStatusText.textContent =
-        reasonMsg ||
-        'Live RSS proxy unreachable or offline — showing verified direct publisher portals';
+        'Offline mode — showing verified direct publisher portals';
     }
     if (signalsStatusDot) {
       signalsStatusDot.className = 'status-dot-offline';
@@ -606,14 +817,6 @@
         summary:
           'Analysis of generative AI in marketing, loyalty mechanics, retail e-commerce, and brand strategy.',
         url: 'https://www.marketingdive.com/'
-      },
-      {
-        category: 'MANAGEMENT & CONSUMER RESEARCH',
-        publisher: 'Harvard Business Review',
-        title: 'Harvard Business Review — Marketing & Customer Strategy Archive',
-        summary:
-          'Research-backed essays on customer journey design, pricing psychology, and behavioral decision science.',
-        url: 'https://hbr.org/topic/subject/marketing'
       }
     ];
 
@@ -649,136 +852,63 @@
       .join('');
   }
 
-  function renderLiveArticles(items, sourceLabel, categoryTag, publisherUrl) {
-    if (!signalsGrid) return;
-    const topItems = items.slice(0, 6);
-    signalsGrid.innerHTML = topItems
-      .map(function (item) {
-        const cleanTitle = stripHtml(item.title || 'Untitled Dispatch');
-        const cleanDesc =
-          stripHtml(item.description || item.content || '').slice(0, 150) + '…';
-        const pubDate = formatPubDate(item.pubDate);
-        const link = item.link || publisherUrl;
-
-        return (
-          '<article class="signal-news-card">' +
-          '  <div>' +
-          '    <div class="signal-news-meta">' +
-          '      <span class="badge badge-cobalt">' +
-          categoryTag +
-          '</span>' +
-          '      <span class="mono-meta">' +
-          sourceLabel +
-          ' · ' +
-          pubDate +
-          '</span>' +
-          '    </div>' +
-          '    <h3 class="signal-news-title"><a href="' +
-          link +
-          '" target="_blank" rel="noopener noreferrer">' +
-          cleanTitle +
-          '</a></h3>' +
-          '    <p class="signal-news-summary">' +
-          cleanDesc +
-          '</p>' +
-          '  </div>' +
-          '  <div class="signal-news-footer">' +
-          '    <a href="' +
-          link +
-          '" target="_blank" rel="noopener noreferrer" class="btn-minimal">Read original story ↗</a>' +
-          '    <a href="' +
-          publisherUrl +
-          '" target="_blank" rel="noopener noreferrer" class="mono-meta">Publisher ↗</a>' +
-          '  </div>' +
-          '</article>'
-        );
-      })
-      .join('');
-  }
-
-  async function fetchLiveBrandSignals(rssUrl, sourceLabel, categoryTag, publisherUrl) {
+  async function loadFeedPreset(preset) {
     if (!signalsGrid) return;
     if (signalsStatusText) {
-      signalsStatusText.textContent = 'Fetching live RSS dispatches from ' + sourceLabel + '…';
+      signalsStatusText.textContent = 'Synchronizing live stories for ' + preset.source + '…';
     }
     signalsGrid.innerHTML =
       '<div class="story-card span-12" style="text-align:center; padding:2rem;">' +
-      '  <span class="mono-meta">SYNCHRONIZING LIVE RSS FEED…</span>' +
+      '  <span class="mono-meta">FETCHING LIVE DISPATCHES…</span>' +
       '</div>';
 
-    const apiEndpoint =
-      'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(rssUrl);
-
     try {
-      const response = await fetch(apiEndpoint);
-      if (!response.ok) throw new Error('HTTP ' + response.status);
-      const data = await response.json();
-      if (data && data.status === 'ok' && Array.isArray(data.items) && data.items.length > 0) {
-        if (signalsStatusText) {
-          signalsStatusText.textContent =
-            'Live RSS feed connected · Source: ' + sourceLabel + ' (' + data.items.length + ' stories)';
-        }
-        if (signalsStatusDot) {
-          signalsStatusDot.className = 'status-dot-live';
-        }
-        renderLiveArticles(data.items, sourceLabel, categoryTag, publisherUrl);
-        return;
+      const items = await fetchRssWithFailover(preset.url);
+      if (signalsStatusText) {
+        signalsStatusText.textContent =
+          'Live feed active · ' + preset.source + ' (Showing latest 6 dispatches)';
       }
-      throw new Error('Empty feed');
+      if (signalsStatusDot) {
+        signalsStatusDot.className = 'status-dot-live';
+      }
+      renderLiveArticles(items, preset.source, preset.category, preset.publisherUrl);
     } catch (_) {
-      renderFallbackPortals(
-        'Live RSS feed temporarily unavailable (offline or CORS rate-limit) — showing verified publisher portals'
-      );
+      renderFallbackPortals();
     }
   }
 
   if (signalsGrid) {
-    let activeFeed = {
-      url: DEFAULT_RSS_URL,
-      source: 'ET BrandEquity / Advertising',
-      category: 'BRAND & AD STRATEGY',
-      publisherUrl: 'https://brandequity.economictimes.indiatimes.com/'
-    };
+    // Automatically upgrade the 3 category buttons on index.html to use the reliable Google News RSS presets
+    signalsCategoryBtns.forEach(function (btn, idx) {
+      if (FEED_PRESETS[idx]) {
+        btn.setAttribute('data-feed-url', FEED_PRESETS[idx].url);
+        btn.setAttribute('data-feed-source', FEED_PRESETS[idx].source);
+        btn.setAttribute('data-feed-category', FEED_PRESETS[idx].category);
+        btn.setAttribute('data-publisher-url', FEED_PRESETS[idx].publisherUrl);
+      }
+    });
 
-    fetchLiveBrandSignals(
-      activeFeed.url,
-      activeFeed.source,
-      activeFeed.category,
-      activeFeed.publisherUrl
-    );
+    let currentPreset = FEED_PRESETS[0];
+    loadFeedPreset(currentPreset);
 
-    if (signalsCategoryBtns.length > 0) {
-      signalsCategoryBtns.forEach(function (btn) {
-        btn.addEventListener('click', function () {
-          signalsCategoryBtns.forEach(function (b) {
-            b.classList.toggle('is-active', b === btn);
-          });
-          activeFeed = {
-            url: btn.getAttribute('data-feed-url') || DEFAULT_RSS_URL,
-            source: btn.getAttribute('data-feed-source') || 'Business RSS',
-            category: btn.getAttribute('data-feed-category') || 'BRAND SIGNAL',
-            publisherUrl:
-              btn.getAttribute('data-publisher-url') ||
-              'https://brandequity.economictimes.indiatimes.com/'
-          };
-          fetchLiveBrandSignals(
-            activeFeed.url,
-            activeFeed.source,
-            activeFeed.category,
-            activeFeed.publisherUrl
-          );
+    signalsCategoryBtns.forEach(function (btn, idx) {
+      btn.addEventListener('click', function () {
+        signalsCategoryBtns.forEach(function (b) {
+          b.classList.toggle('is-active', b === btn);
         });
+        currentPreset = FEED_PRESETS[idx] || {
+          url: btn.getAttribute('data-feed-url'),
+          source: btn.getAttribute('data-feed-source'),
+          category: btn.getAttribute('data-feed-category'),
+          publisherUrl: btn.getAttribute('data-publisher-url')
+        };
+        loadFeedPreset(currentPreset);
       });
-    }
+    });
 
     if (refreshSignalsBtn) {
       refreshSignalsBtn.addEventListener('click', function () {
-        fetchLiveBrandSignals(
-          activeFeed.url,
-          activeFeed.source,
-          activeFeed.category,
-          activeFeed.publisherUrl
-        );
+        loadFeedPreset(currentPreset);
       });
     }
   }
@@ -794,7 +924,7 @@
         navigator.clipboard.writeText(email).then(function () {
           const original = copyBtn.textContent;
           copyBtn.textContent = 'COPIED TO CLIPBOARD ✓';
-          updateSigMessage('Copied ' + email + ' to your clipboard!');
+          pushBotNotification('Copied ' + email + ' to your clipboard!');
           setTimeout(function () {
             copyBtn.textContent = original;
           }, 2200);
